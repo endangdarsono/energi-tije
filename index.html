@@ -53,16 +53,33 @@
 </head>
 <body class="bg-gradient-to-br from-blue-100 via-yellow-50 to-green-100 min-h-screen">
     <!-- Navigation -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex justify-center space-x-6">
-                <button onclick="showSection('home')" class="nav-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300">Home</button>
-                <button onclick="showSection('story')" class="nav-btn bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300">Cerita</button>
-                <button onclick="showSection('quiz')" class="nav-btn bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300">Kuis</button>
-                <button onclick="showSection('reflection')" class="nav-btn bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300">Refleksi</button>
-            </div>
-        </div>
-    </nav>
+<nav class="bg-white shadow-lg sticky top-0 z-50">
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <!-- Judul -->
+    <h1 class="text-xl font-bold text-blue-600">Energi di Sekitar Kita</h1>
+
+    <!-- Tombol Hamburger (muncul di layar kecil) -->
+    <button id="menu-btn" class="block md:hidden text-gray-700 focus:outline-none">
+      ☰
+    </button>
+
+    <!-- Menu -->
+    <div id="menu" class="hidden md:flex space-x-4">
+      <button onclick="showSection('home')" class="nav-btn bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300">Home</button>
+      <button onclick="showSection('story')" class="nav-btn bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300">Cerita</button>
+      <button onclick="showSection('quiz')" class="nav-btn bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300">Kuis</button>
+      <button onclick="showSection('reflection')" class="nav-btn bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full font-semibold transition-all duration-300">Refleksi</button>
+    </div>
+  </div>
+
+  <!-- Menu versi mobile -->
+  <div id="mobile-menu" class="hidden flex-col space-y-2 px-4 pb-4 md:hidden">
+    <button onclick="showSection('home')" class="nav-btn bg-blue-500 text-white px-4 py-2 rounded-full">Home</button>
+    <button onclick="showSection('story')" class="nav-btn bg-yellow-500 text-white px-4 py-2 rounded-full">Cerita</button>
+    <button onclick="showSection('quiz')" class="nav-btn bg-green-500 text-white px-4 py-2 rounded-full">Kuis</button>
+    <button onclick="showSection('reflection')" class="nav-btn bg-purple-500 text-white px-4 py-2 rounded-full">Refleksi</button>
+  </div>
+</nav>
 
     <!-- Home Section -->
     <section id="home" class="section min-h-screen flex items-center justify-center">
@@ -493,5 +510,13 @@
             showSection('home');
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9781a2291283fe1e',t:'MTc1NjY5Njg0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>
+  // Script untuk toggle menu di layar kecil
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+</script>
 </html>
