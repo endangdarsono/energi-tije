@@ -1,16 +1,452 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Energi di Sekitar Tije</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energi di Sekitar Satir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Baloo 2', cursive;
+        }
+        .story-card {
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s ease-out forwards;
+        }
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .bounce-btn {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        .quiz-option {
+            transition: all 0.3s ease;
+        }
+        .quiz-option:hover {
+            transform: scale(1.05);
+        }
+        .correct {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+        }
+        .incorrect {
+            background: linear-gradient(135deg, #ef4444, #f87171);
+            color: white;
+        }
+    </style>
 </head>
-<body>
-  <h1>🌟 Energi di Sekitar Tije 🌟</h1>
-  <p>Belajar tentang perubahan energi lewat cerita dan kuis interaktif.</p>
-  <nav>
-    <a href="cerita.html">📖 Baca Cerita</a> |
-    <a href="kuis.html">📝 Mulai Kuis</a>
-  </nav>
-</body>
+<body class="bg-gradient-to-br from-blue-100 via-yellow-50 to-green-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-center space-x-6">
+                <button onclick="showSection('home')" class="nav-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300">Home</button>
+                <button onclick="showSection('story')" class="nav-btn bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300">Cerita</button>
+                <button onclick="showSection('quiz')" class="nav-btn bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300">Kuis</button>
+                <button onclick="showSection('reflection')" class="nav-btn bg-purple-500 hover:bg-purple-600 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300">Refleksi</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section min-h-screen flex items-center justify-center">
+        <div class="text-center max-w-4xl mx-auto px-4">
+            <h1 class="text-6xl font-bold text-blue-600 mb-4 animate-pulse">Energi di Sekitar Tije</h1>
+            <p class="text-2xl text-gray-700 mb-8">Belajar Perubahan Energi di Sekitar Kita</p>
+            
+            <!-- Satir Character -->
+            <div class="mb-8">
+                <svg width="200" height="200" viewBox="0 0 200 200" class="mx-auto bounce-btn">
+                    <!-- Head -->
+                    <circle cx="100" cy="80" r="40" fill="#fbbf24" stroke="#f59e0b" stroke-width="3"/>
+                    <!-- Eyes -->
+                    <circle cx="90" cy="75" r="4" fill="#1f2937"/>
+                    <circle cx="110" cy="75" r="4" fill="#1f2937"/>
+                    <!-- Smile -->
+                    <path d="M 85 85 Q 100 95 115 85" stroke="#1f2937" stroke-width="3" fill="none"/>
+                    <!-- Body -->
+                    <rect x="80" y="120" width="40" height="50" rx="20" fill="#3b82f6"/>
+                    <!-- Arms -->
+                    <circle cx="65" cy="135" r="8" fill="#fbbf24"/>
+                    <circle cx="135" cy="135" r="8" fill="#fbbf24"/>
+                    <!-- Legs -->
+                    <rect x="85" y="170" width="8" height="20" fill="#1f2937"/>
+                    <rect x="107" y="170" width="8" height="20" fill="#1f2937"/>
+                    <!-- Energy symbols around -->
+                    <text x="50" y="50" font-size="20">⚡</text>
+                    <text x="150" y="60" font-size="20">💡</text>
+                    <text x="40" y="120" font-size="20">🔥</text>
+                    <text x="160" y="130" font-size="20">🌞</text>
+                </svg>
+            </div>
+            
+            <button onclick="showSection('story')" class="bg-gradient-to-r from-blue-500 to-green-500 hover:from-blue-600 hover:to-green-600 text-white text-xl px-8 py-4 rounded-full font-bold shadow-lg transform hover:scale-105 transition-all duration-300">
+                Mulai Petualangan! 🚀
+            </button>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="section hidden py-12">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-blue-600 mb-12">Petualangan Tije Belajar Energi</h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg story-card">
+                <div class="prose prose-lg max-w-none">
+                    <div class="space-y-6 text-gray-700 leading-relaxed">
+                        <p><strong class="text-blue-600">Pagi itu,</strong> Tije baru saja terbangun dari tidurnya. Dengan mata yang masih mengantuk, ia menekan tombol lampu di samping tempat tidur. "Klik!" lampu pun menyala terang dan membuat kamarnya jadi cerah. Tije mengerjapkan mata lalu bergumam pelan, "Kenapa ya, begitu ditekan, lampu langsung bercahaya? Ternyata ada energi yang bekerja di baliknya." Ia mulai menyadari bahwa listrik bisa berubah menjadi cahaya.</p>
+
+                        <p><strong class="text-yellow-600">Tak lama kemudian,</strong> Tije mencium aroma makanan dari dapur. Ia berlari kecil dan melihat Ibu sedang merebus air di atas kompor gas. Uap putih mengepul dari panci. "Bu, kenapa airnya bisa mendidih begitu?" tanyanya penasaran. Ibu tersenyum sambil mengaduk masakan, "Itu karena gas di kompor mengandung energi kimia. Energi kimia berubah menjadi panas, sehingga air mendidih dan keluar uap." Tije mengangguk, semakin paham bahwa energi bisa berubah bentuk.</p>
+
+                        <p><strong class="text-green-600">Setelah makan,</strong> Tije berdiri di depan kipas angin yang berputar kencang. Angin sejuk menyapu wajahnya. "Wah, segarnya! Jadi listrik ternyata berubah jadi gerak pada kipas," katanya sambil tersenyum. Energi benar-benar ada di mana-mana.</p>
+
+                        <p><strong class="text-purple-600">Tak lama kemudian,</strong> Ibu memanggil, "Tije, ayo sarapan dulu sebelum berangkat sekolah!" Tije pun makan dengan lahap. Setelah selesai, ia segera mengambil sepeda dan mulai mengayuh menuju sekolah. "Horeee, aku kuat sekali! Ini semua karena sudah makan," katanya. Tije sadar, energi kimia dari makanan membuat tubuhnya kuat untuk bergerak.</p>
+
+                        <p><strong class="text-blue-600">Di kelas,</strong> Guru berdiri di depan papan tulis. Beliau menggambar lampu, kompor, kipas, dan sepeda sambil berkata, "Anak-anak, hari ini kita belajar tentang perubahan energi. Banyak contohnya di sekitar kita." Tije dan Rina mendengarkan dengan penuh semangat.</p>
+
+                        <p><strong class="text-orange-600">"Siapa yang bisa memberi contoh perubahan energi di rumah?"</strong> tanya Guru. Tije segera mengangkat tangan tinggi-tinggi. "Kalau lampu dinyalakan, energi listrik berubah menjadi cahaya. Karena itu kita bisa belajar walaupun malam hari," jawabnya mantap. Guru tersenyum bangga, "Bagus sekali, Tije!"</p>
+
+                        <p><strong class="text-pink-600">Rina pun ikut menambahkan,</strong> "Kalau jemuran dijemur di bawah matahari, pakaian jadi cepat kering. Itu karena energi cahaya dari matahari berubah jadi panas." Guru mengangguk puas, "Betul sekali, Rina. Kalian hebat!"</p>
+
+                        <p><strong class="text-green-600">Sepulang sekolah,</strong> Tije dan Rina bermain bola di lapangan. Tije menendang bola keras-keras hingga meluncur jauh. "Itu energi gerak dari kakimu yang berpindah ke bola," kata Rina sambil tertawa. Tije pun tertawa senang, "Energi ternyata selalu ada di sekitar kita, ya Rin!"</p>
+
+                        <p><strong class="text-indigo-600">Sesampainya di rumah,</strong> Tije langsung bercerita kepada Ibu. "Bu, aku belajar banyak tentang energi. Lampu, kompor, kipas, sepeda, semuanya berubah bentuk energi. Ternyata energi itu sangat penting!" Ibu tersenyum sambil mengusap kepalanya, "Benar, Nak. Karena itu kita harus menggunakannya dengan bijak dan tidak boros."</p>
+
+                        <p><strong class="text-purple-600">Malam harinya,</strong> Tije duduk di meja belajar dengan lampu yang menyala terang. Ia menulis di buku harian: "Hari ini aku belajar bahwa energi bisa berubah bentuk. Energi sangat bermanfaat bagi diriku dan lingkungan. Aku harus menghemat energi, supaya tetap bisa digunakan di masa depan." Tije menutup bukunya dengan senyum puas, lalu bersiap tidur dengan hati gembira.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Section -->
+    <section id="quiz" class="section hidden py-12">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-green-600 mb-12">Ayo Uji Pemahamanmu! 🧠</h2>
+            
+            <div class="space-y-8">
+                <!-- Question 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-blue-600 mb-4">1. Lampu kamar Tije menyala terang karena terjadi perubahan energi dari …</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(1, 'A', false)" class="quiz-option w-full text-left p-4 bg-blue-100 hover:bg-blue-200 rounded-lg font-semibold">A. Panas → Cahaya</button>
+                        <button onclick="checkAnswer(1, 'B', true)" class="quiz-option w-full text-left p-4 bg-blue-100 hover:bg-blue-200 rounded-lg font-semibold">B. Listrik → Cahaya</button>
+                        <button onclick="checkAnswer(1, 'C', false)" class="quiz-option w-full text-left p-4 bg-blue-100 hover:bg-blue-200 rounded-lg font-semibold">C. Gerak → Cahaya</button>
+                        <button onclick="checkAnswer(1, 'D', false)" class="quiz-option w-full text-left p-4 bg-blue-100 hover:bg-blue-200 rounded-lg font-semibold">D. Kimia → Cahaya</button>
+                    </div>
+                    <div id="feedback1" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-yellow-600 mb-4">2. Energi kimia pada gas kompor berubah menjadi … saat digunakan untuk memasak.</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(2, 'A', false)" class="quiz-option w-full text-left p-4 bg-yellow-100 hover:bg-yellow-200 rounded-lg font-semibold">A. Energi bunyi</button>
+                        <button onclick="checkAnswer(2, 'B', false)" class="quiz-option w-full text-left p-4 bg-yellow-100 hover:bg-yellow-200 rounded-lg font-semibold">B. Energi cahaya</button>
+                        <button onclick="checkAnswer(2, 'C', true)" class="quiz-option w-full text-left p-4 bg-yellow-100 hover:bg-yellow-200 rounded-lg font-semibold">C. Energi panas</button>
+                        <button onclick="checkAnswer(2, 'D', false)" class="quiz-option w-full text-left p-4 bg-yellow-100 hover:bg-yellow-200 rounded-lg font-semibold">D. Energi gerak</button>
+                    </div>
+                    <div id="feedback2" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-green-600 mb-4">3. Mengapa air di panci bisa mendidih?</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(3, 'A', true)" class="quiz-option w-full text-left p-4 bg-green-100 hover:bg-green-200 rounded-lg font-semibold">A. Karena gas berubah menjadi energi panas</button>
+                        <button onclick="checkAnswer(3, 'B', false)" class="quiz-option w-full text-left p-4 bg-green-100 hover:bg-green-200 rounded-lg font-semibold">B. Karena gas berubah menjadi energi bunyi</button>
+                        <button onclick="checkAnswer(3, 'C', false)" class="quiz-option w-full text-left p-4 bg-green-100 hover:bg-green-200 rounded-lg font-semibold">C. Karena panci berat</button>
+                        <button onclick="checkAnswer(3, 'D', false)" class="quiz-option w-full text-left p-4 bg-green-100 hover:bg-green-200 rounded-lg font-semibold">D. Karena air selalu mendidih sendiri</button>
+                    </div>
+                    <div id="feedback3" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-purple-600 mb-4">4. Kipas angin bekerja dengan cara mengubah energi …</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(4, 'A', false)" class="quiz-option w-full text-left p-4 bg-purple-100 hover:bg-purple-200 rounded-lg font-semibold">A. Panas → Bunyi</button>
+                        <button onclick="checkAnswer(4, 'B', true)" class="quiz-option w-full text-left p-4 bg-purple-100 hover:bg-purple-200 rounded-lg font-semibold">B. Listrik → Gerak</button>
+                        <button onclick="checkAnswer(4, 'C', false)" class="quiz-option w-full text-left p-4 bg-purple-100 hover:bg-purple-200 rounded-lg font-semibold">C. Cahaya → Panas</button>
+                        <button onclick="checkAnswer(4, 'D', false)" class="quiz-option w-full text-left p-4 bg-purple-100 hover:bg-purple-200 rounded-lg font-semibold">D. Kimia → Cahaya</button>
+                    </div>
+                    <div id="feedback4" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-pink-600 mb-4">5. Energi dari makanan yang dimakan Tije berubah menjadi … ketika ia mengayuh sepeda.</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(5, 'A', false)" class="quiz-option w-full text-left p-4 bg-pink-100 hover:bg-pink-200 rounded-lg font-semibold">A. Energi bunyi</button>
+                        <button onclick="checkAnswer(5, 'B', true)" class="quiz-option w-full text-left p-4 bg-pink-100 hover:bg-pink-200 rounded-lg font-semibold">B. Energi gerak</button>
+                        <button onclick="checkAnswer(5, 'C', false)" class="quiz-option w-full text-left p-4 bg-pink-100 hover:bg-pink-200 rounded-lg font-semibold">C. Energi cahaya</button>
+                        <button onclick="checkAnswer(5, 'D', false)" class="quiz-option w-full text-left p-4 bg-pink-100 hover:bg-pink-200 rounded-lg font-semibold">D. Energi panas</button>
+                    </div>
+                    <div id="feedback5" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 6 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-indigo-600 mb-4">6. Manfaat perubahan energi listrik menjadi cahaya pada lampu adalah …</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(6, 'A', false)" class="quiz-option w-full text-left p-4 bg-indigo-100 hover:bg-indigo-200 rounded-lg font-semibold">A. Untuk menyalakan kipas</button>
+                        <button onclick="checkAnswer(6, 'B', false)" class="quiz-option w-full text-left p-4 bg-indigo-100 hover:bg-indigo-200 rounded-lg font-semibold">B. Untuk memasak</button>
+                        <button onclick="checkAnswer(6, 'C', true)" class="quiz-option w-full text-left p-4 bg-indigo-100 hover:bg-indigo-200 rounded-lg font-semibold">C. Untuk menerangi ruangan</button>
+                        <button onclick="checkAnswer(6, 'D', false)" class="quiz-option w-full text-left p-4 bg-indigo-100 hover:bg-indigo-200 rounded-lg font-semibold">D. Untuk mengeringkan pakaian</button>
+                    </div>
+                    <div id="feedback6" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-orange-600 mb-4">7. Saat menjemur pakaian di bawah matahari, terjadi perubahan energi …</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(7, 'A', true)" class="quiz-option w-full text-left p-4 bg-orange-100 hover:bg-orange-200 rounded-lg font-semibold">A. Cahaya → Panas</button>
+                        <button onclick="checkAnswer(7, 'B', false)" class="quiz-option w-full text-left p-4 bg-orange-100 hover:bg-orange-200 rounded-lg font-semibold">B. Gerak → Cahaya</button>
+                        <button onclick="checkAnswer(7, 'C', false)" class="quiz-option w-full text-left p-4 bg-orange-100 hover:bg-orange-200 rounded-lg font-semibold">C. Panas → Bunyi</button>
+                        <button onclick="checkAnswer(7, 'D', false)" class="quiz-option w-full text-left p-4 bg-orange-100 hover:bg-orange-200 rounded-lg font-semibold">D. Kimia → Panas</button>
+                    </div>
+                    <div id="feedback7" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-teal-600 mb-4">8. Ketika Tije menendang bola, energi dari kakinya berpindah menjadi …</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(8, 'A', false)" class="quiz-option w-full text-left p-4 bg-teal-100 hover:bg-teal-200 rounded-lg font-semibold">A. Energi listrik</button>
+                        <button onclick="checkAnswer(8, 'B', true)" class="quiz-option w-full text-left p-4 bg-teal-100 hover:bg-teal-200 rounded-lg font-semibold">B. Energi gerak bola</button>
+                        <button onclick="checkAnswer(8, 'C', false)" class="quiz-option w-full text-left p-4 bg-teal-100 hover:bg-teal-200 rounded-lg font-semibold">C. Energi bunyi</button>
+                        <button onclick="checkAnswer(8, 'D', false)" class="quiz-option w-full text-left p-4 bg-teal-100 hover:bg-teal-200 rounded-lg font-semibold">D. Energi cahaya</button>
+                    </div>
+                    <div id="feedback8" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 9 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-red-600 mb-4">9. Mengapa Tije bisa kuat bermain bola setelah makan?</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(9, 'A', true)" class="quiz-option w-full text-left p-4 bg-red-100 hover:bg-red-200 rounded-lg font-semibold">A. Karena makanan memberi energi kimia yang diubah jadi energi gerak</button>
+                        <button onclick="checkAnswer(9, 'B', false)" class="quiz-option w-full text-left p-4 bg-red-100 hover:bg-red-200 rounded-lg font-semibold">B. Karena makanan berubah jadi cahaya</button>
+                        <button onclick="checkAnswer(9, 'C', false)" class="quiz-option w-full text-left p-4 bg-red-100 hover:bg-red-200 rounded-lg font-semibold">C. Karena makanan berubah jadi bunyi</button>
+                        <button onclick="checkAnswer(9, 'D', false)" class="quiz-option w-full text-left p-4 bg-red-100 hover:bg-red-200 rounded-lg font-semibold">D. Karena makanan tidak berubah</button>
+                    </div>
+                    <div id="feedback9" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="bg-white rounded-2xl p-6 shadow-lg">
+                    <h3 class="text-xl font-bold text-cyan-600 mb-4">10. Apa yang harus dilakukan agar energi tidak cepat habis?</h3>
+                    <div class="space-y-3">
+                        <button onclick="checkAnswer(10, 'A', false)" class="quiz-option w-full text-left p-4 bg-cyan-100 hover:bg-cyan-200 rounded-lg font-semibold">A. Memboroskan energi</button>
+                        <button onclick="checkAnswer(10, 'B', true)" class="quiz-option w-full text-left p-4 bg-cyan-100 hover:bg-cyan-200 rounded-lg font-semibold">B. Menggunakan energi dengan bijak</button>
+                        <button onclick="checkAnswer(10, 'C', false)" class="quiz-option w-full text-left p-4 bg-cyan-100 hover:bg-cyan-200 rounded-lg font-semibold">C. Menyalakan semua lampu siang hari</button>
+                        <button onclick="checkAnswer(10, 'D', false)" class="quiz-option w-full text-left p-4 bg-cyan-100 hover:bg-cyan-200 rounded-lg font-semibold">D. Membiarkan kipas hidup terus</button>
+                    </div>
+                    <div id="feedback10" class="mt-4 text-center font-bold text-lg hidden"></div>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <div id="quizScore" class="text-2xl font-bold text-purple-600 hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reflection Section -->
+    <section id="reflection" class="section hidden py-12">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center text-purple-600 mb-12">Apa yang Kamu Pelajari? 🤔</h2>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <h3 class="text-xl font-bold text-gray-700 mb-6">Tuliskan 2 contoh perubahan energi di rumahmu:</h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-gray-600 font-semibold mb-2">Contoh 1:</label>
+                        <textarea id="example1" class="w-full p-4 border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none" rows="3" placeholder="Contoh: Setrika listrik berubah jadi panas untuk merapikan baju..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-gray-600 font-semibold mb-2">Contoh 2:</label>
+                        <textarea id="example2" class="w-full p-4 border-2 border-purple-200 rounded-lg focus:border-purple-500 focus:outline-none" rows="3" placeholder="Contoh: Blender mengubah listrik jadi gerak untuk menghaluskan buah..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-8">
+                    <button onclick="submitReflection()" class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-xl px-8 py-4 rounded-full font-bold shadow-lg transform hover:scale-105 transition-all duration-300">
+                        Kirim 📝
+                    </button>
+                </div>
+                
+                <div id="reflectionFeedback" class="mt-6 text-center font-bold text-lg hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-blue-600 to-green-600 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-xl font-bold">⚡ Energi itu bermanfaat, mari kita gunakan dengan bijak! 🌱</p>
+            <p class="mt-2 text-blue-100">Belajar energi bersama Tije - Website Pembelajaran Interaktif</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Quiz Feedback -->
+    <div id="quizModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center">
+            <div id="modalContent"></div>
+            <button onclick="closeModal()" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-full font-semibold">OK</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 'home';
+        let quizAnswers = {};
+        let totalQuestions = 10;
+
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+            
+            // Show selected section
+            document.getElementById(section).classList.remove('hidden');
+            currentSection = section;
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('ring-4', 'ring-white');
+            });
+            event.target.classList.add('ring-4', 'ring-white');
+            
+            // Animate story cards if story section
+            if (section === 'story') {
+                setTimeout(() => {
+                    document.querySelectorAll('.story-card').forEach((card, index) => {
+                        card.style.animationDelay = `${index * 0.2}s`;
+                    });
+                }, 100);
+            }
+        }
+
+        function checkAnswer(questionNum, selectedAnswer, isCorrect) {
+            quizAnswers[questionNum] = isCorrect;
+            
+            const feedbackDiv = document.getElementById(`feedback${questionNum}`);
+            const questionDiv = feedbackDiv.parentElement;
+            const buttons = questionDiv.querySelectorAll('.quiz-option');
+            
+            // Disable all buttons for this question
+            buttons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-blue-200', 'hover:bg-yellow-200', 'hover:bg-green-200', 'hover:bg-purple-200', 'hover:bg-pink-200', 'hover:bg-indigo-200', 'hover:bg-orange-200', 'hover:bg-teal-200', 'hover:bg-red-200', 'hover:bg-cyan-200');
+            });
+            
+            // Style the selected button
+            const selectedButton = Array.from(buttons).find(btn => btn.textContent.startsWith(selectedAnswer));
+            if (isCorrect) {
+                selectedButton.classList.add('correct');
+                feedbackDiv.innerHTML = '🎉 Benar! 👍';
+                feedbackDiv.className = 'mt-4 text-center font-bold text-lg text-green-600';
+            } else {
+                selectedButton.classList.add('incorrect');
+                feedbackDiv.innerHTML = '🔄 Coba lagi!';
+                feedbackDiv.className = 'mt-4 text-center font-bold text-lg text-red-600';
+                
+                // Re-enable buttons after 2 seconds
+                setTimeout(() => {
+                    buttons.forEach(btn => {
+                        btn.disabled = false;
+                        btn.classList.remove('incorrect');
+                        btn.classList.add('hover:bg-blue-200');
+                    });
+                    feedbackDiv.classList.add('hidden');
+                    delete quizAnswers[questionNum];
+                }, 2000);
+            }
+            
+            feedbackDiv.classList.remove('hidden');
+            
+            // Check if all questions answered correctly
+            if (Object.keys(quizAnswers).length === totalQuestions) {
+                const correctAnswers = Object.values(quizAnswers).filter(answer => answer).length;
+                setTimeout(() => {
+                    showQuizResult(correctAnswers);
+                }, 1000);
+            }
+        }
+
+        function showQuizResult(score) {
+            const scoreDiv = document.getElementById('quizScore');
+            if (score === totalQuestions) {
+                scoreDiv.innerHTML = `🏆 Luar biasa! Kamu menjawab ${score}/${totalQuestions} dengan benar! 🌟`;
+                scoreDiv.className = 'text-2xl font-bold text-green-600';
+            } else if (score >= 7) {
+                scoreDiv.innerHTML = `👍 Bagus! Kamu menjawab ${score}/${totalQuestions} dengan benar! Terus belajar ya! 📚`;
+                scoreDiv.className = 'text-2xl font-bold text-blue-600';
+            } else {
+                scoreDiv.innerHTML = `💪 Kamu menjawab ${score}/${totalQuestions} dengan benar! Ayo baca cerita lagi dan coba lagi! 📖`;
+                scoreDiv.className = 'text-2xl font-bold text-orange-600';
+            }
+            scoreDiv.classList.remove('hidden');
+        }
+
+        function submitReflection() {
+            const example1 = document.getElementById('example1').value.trim();
+            const example2 = document.getElementById('example2').value.trim();
+            const feedbackDiv = document.getElementById('reflectionFeedback');
+            
+            if (example1 && example2) {
+                feedbackDiv.innerHTML = '🎉 Terima kasih! Jawabanmu sangat bagus! Kamu sudah memahami perubahan energi dengan baik! 🌟';
+                feedbackDiv.className = 'mt-6 text-center font-bold text-lg text-green-600';
+                
+                // Show celebration animation
+                setTimeout(() => {
+                    showModal(`
+                        <div class="text-6xl mb-4">🎊</div>
+                        <h3 class="text-2xl font-bold text-green-600 mb-2">Selamat!</h3>
+                        <p class="text-gray-700">Kamu telah menyelesaikan pembelajaran tentang energi bersama Tije!</p>
+                        <p class="text-sm text-gray-500 mt-2">Terus semangat belajar ya! 📚✨</p>
+                    `);
+                }, 500);
+            } else {
+                feedbackDiv.innerHTML = '📝 Yuk, lengkapi kedua contohnya dulu! Pikirkan perubahan energi yang kamu lihat di rumah! 💡';
+                feedbackDiv.className = 'mt-6 text-center font-bold text-lg text-orange-600';
+            }
+            
+            feedbackDiv.classList.remove('hidden');
+        }
+
+        function showModal(content) {
+            document.getElementById('modalContent').innerHTML = content;
+            document.getElementById('quizModal').classList.remove('hidden');
+            document.getElementById('quizModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('quizModal').classList.add('hidden');
+            document.getElementById('quizModal').classList.remove('flex');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9781a2291283fe1e',t:'MTc1NjY5Njg0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
